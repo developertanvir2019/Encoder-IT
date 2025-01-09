@@ -42,9 +42,9 @@ const TablePagination = ({
                 id="frm-items-per-page"
                 onChange={(e) => setPerPage(parseInt(e.target.value, 10))}
               >
-                <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
+                <option value="20">20</option>
               </select>
             </fieldset>
           </form>
