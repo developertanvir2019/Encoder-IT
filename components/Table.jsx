@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TableFilter from "./ui/TableFilter";
 import TableBody from "./ui/TableBody";
 
@@ -127,6 +127,18 @@ const MainTable = () => {
     },
   ]);
   const [searchText, setSearchText] = useState("");
+
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch(`https://api.razzakfashion.com/?paginate=5&search=Kiehn`)
+      // /?paginate=5&search=Kiehn
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
   return (
     <>
       <div className="bg-white dark:bg-slate-800 rounded-md shadow-default">
@@ -135,11 +147,7 @@ const MainTable = () => {
           searchText={searchText}
           setSearchText={setSearchText}
         />
-        <TableBody
-          setOrderData={setReviewData}
-          searchText={searchText}
-          orderData={reviewData}
-        />
+        <TableBody setData={setData} searchText={searchText} orderData={data} />
       </div>
     </>
   );
