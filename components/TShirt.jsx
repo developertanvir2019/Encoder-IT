@@ -47,14 +47,14 @@ const TShirtCustomizer = () => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-6 p-4">
+    <div className="flex justify-center space-y-6 gap-8 my-7">
       {/* T-Shirt Section */}
       <div
         ref={containerRef}
         className="relative border-2 border-gray-300 p-4"
         style={{
-          width: "400px",
-          height: "500px",
+          width: "350px",
+          height: "400px",
           backgroundImage: "url('/shirt.png')",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
@@ -87,58 +87,58 @@ const TShirtCustomizer = () => {
       </div>
 
       {/* File Uploader */}
-      <label className="flex flex-col items-center w-64 px-4 py-6 bg-white rounded-lg shadow-lg cursor-pointer hover:bg-gray-100">
-        <svg
-          className="w-8 h-8 text-gray-500"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M16 16l-4-4m0 0l-4 4m4-4V4m0 12l4-4m-4 4H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2v-6a2 2 0 00-2-2z"
-          />
-        </svg>
-        <span className="mt-2 text-sm font-medium text-gray-600">
-          Upload Logo
-        </span>
-        <input
-          type="file"
-          className="hidden"
-          accept="image/*"
-          onChange={handleFileUpload}
-        />
-      </label>
-
-      {/* Resizer */}
-      {logo && (
-        <div className="flex flex-col items-center space-y-2">
-          <label className="text-sm font-medium text-gray-600">
-            Resize Logo
-          </label>
+      <div className="flex flex-col gap-5">
+        <label className="flex flex-col items-center w-64 px-4 py-6 bg-white rounded-lg shadow-lg cursor-pointer hover:bg-gray-100">
+          <svg
+            className="w-8 h-8 text-gray-500"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M16 16l-4-4m0 0l-4 4m4-4V4m0 12l4-4m-4 4H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2v-6a2 2 0 00-2-2z"
+            />
+          </svg>
+          <span className="mt-2 text-sm font-medium text-gray-600">
+            Upload Logo
+          </span>
           <input
-            type="range"
-            min="50"
-            max="300"
-            value={logoSize.width}
-            onChange={handleResize}
-            className="w-64"
+            type="file"
+            className="hidden"
+            accept="image/*"
+            onChange={handleFileUpload}
           />
-        </div>
-      )}
+        </label>
 
-      {/* Download Button */}
-      {logo && (
-        <button
-          onClick={handleDownload}
-          className="px-6 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600"
-        >
-          Download T-Shirt Image
-        </button>
-      )}
+        {/* Resizer */}
+        {logo && (
+          <div className="flex flex-col items-center space-y-2">
+            <label className="  text-white font-semibold">Resize Logo</label>
+            <input
+              type="range"
+              min="50"
+              max="300"
+              value={logoSize.width}
+              onChange={handleResize}
+              className="w-64"
+            />
+          </div>
+        )}
+
+        {/* Download Button */}
+        {logo && (
+          <button
+            onClick={handleDownload}
+            className="px-6 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600"
+          >
+            Download T-Shirt Image
+          </button>
+        )}
+      </div>
     </div>
   );
 };
