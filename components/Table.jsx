@@ -11,17 +11,27 @@ const MainTable = () => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
-    fetch(
-      `https://api.razzakfashion.com/?paginate=${perPage}&search=${searchText}&page=${currentPage}`
-    )
-      // /?paginate=5&search=Kiehn
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `https://api.razzakfashion.com/?paginate=${perPage}&search=${searchText}&page=${currentPage}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setData(null);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, [searchText, perPage, currentPage]);
-  console.log(23, perPage);
 
   return (
     <>
@@ -35,6 +45,7 @@ const MainTable = () => {
           perPage={perPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          loading={isLoading}
         />
       </div>
     </>

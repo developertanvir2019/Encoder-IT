@@ -11,6 +11,7 @@ const TableBody = ({
   perPage,
   currentPage,
   setCurrentPage,
+  loading,
 }) => {
   const [tableData, setTableData] = useState([]);
   const [selectItem, setSelectItem] = useState([]);
@@ -27,7 +28,13 @@ const TableBody = ({
   useEffect(() => {
     setTableData(orderData?.data);
   }, [orderData?.data]);
-  console.log(222, tableData);
+  if (loading) {
+    return (
+      <div className="h-screen flex justify-center pt-12">
+        <h1 className="text-lg text-white">Loading....</h1>
+      </div>
+    );
+  }
   return (
     <>
       {!tableData?.length ? (
