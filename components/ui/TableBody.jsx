@@ -5,7 +5,13 @@ import CustomCheckbox from "../common/Checkbox";
 import TablePagination from "../common/Pagination";
 import dayjs from "dayjs";
 
-const TableBody = ({ orderData, searchText }) => {
+const TableBody = ({
+  orderData,
+  setPerPage,
+  perPage,
+  currentPage,
+  setCurrentPage,
+}) => {
   const [tableData, setTableData] = useState([]);
   const [selectItem, setSelectItem] = useState([]);
   const handleSelect = (data) => {
@@ -17,9 +23,10 @@ const TableBody = ({ orderData, searchText }) => {
       setSelectItem((prevData) => [...prevData, data]);
     }
   };
+
   useEffect(() => {
     setTableData(orderData?.data);
-  }, [orderData]);
+  }, [orderData?.data]);
   console.log(222, tableData);
   return (
     <>
@@ -141,12 +148,15 @@ const TableBody = ({ orderData, searchText }) => {
               })}
             </tbody>
           </table>
-          {/* <div className="py-3">
+          <div className="py-3">
             <TablePagination
-              brandData={orderData}
-              setTableData={setTableData}
+              setPerPage={setPerPage}
+              totalItems={orderData?.total}
+              itemsPerPage={perPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
             />
-          </div> */}
+          </div>
         </div>
       )}
     </>

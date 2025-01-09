@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 
-const TablePagination = ({ brandData, setTableData }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-
-  const totalItems = brandData?.length;
-
+const TablePagination = ({
+  setPerPage,
+  itemsPerPage,
+  totalItems,
+  currentPage,
+  setCurrentPage,
+}) => {
   const handlePrevClick = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
@@ -20,16 +21,8 @@ const TablePagination = ({ brandData, setTableData }) => {
     }
   };
 
-  const handleItemsPerPageChange = (e) => {
-    setItemsPerPage(parseInt(e.target.value, 10));
-    setCurrentPage(1); // Reset to the first page when changing items per page
-  };
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(currentPage * itemsPerPage, totalItems);
-  useEffect(() => {
-    setTableData(brandData?.slice(startIndex, endIndex));
-  }, [brandData, endIndex, startIndex]);
 
   return (
     <div className="lg:flex justify-end mb-5">
@@ -47,12 +40,11 @@ const TablePagination = ({ brandData, setTableData }) => {
                 className="dark:bg-slate-700 bg-slate-100 rounded-md"
                 name="itemsPerPage"
                 id="frm-items-per-page"
-                value={itemsPerPage}
-                onChange={handleItemsPerPageChange}
+                onChange={(e) => setPerPage(parseInt(e.target.value, 10))}
               >
+                <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
-                <option value="20">20</option>
               </select>
             </fieldset>
           </form>

@@ -1,7 +1,7 @@
 "use client";
 import { CiSearch } from "react-icons/ci";
 import { AiOutlineClear } from "react-icons/ai";
-const TableFilter = ({ reviewData, searchText, setSearchText }) => {
+const TableFilter = ({ searchText, setSearchText }) => {
   return (
     <div className="my-4 px-4 pt-5">
       <div className="lg:flex md:flex sm:block items-center gap-5 mt-4">
