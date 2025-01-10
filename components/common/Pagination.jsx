@@ -40,6 +40,7 @@ const TablePagination = ({
                 className="dark:bg-slate-700 bg-slate-100 rounded-md"
                 name="itemsPerPage"
                 id="frm-items-per-page"
+                value={itemsPerPage}
                 onChange={(e) => setPerPage(parseInt(e.target.value, 10))}
               >
                 <option value="10">10</option>
